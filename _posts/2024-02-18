@@ -7,9 +7,9 @@ categories: Computer Vision
 
 ## Convolutional Architecture
 
-
-
-- Bullet list item 1
+Important Terms :
+- Three-dimensional convolutions
+  What if the input to a convolutional layer is a stack of K maps? (Height x Width x K) filter and L filters. 
 - Bullet list item 2
 
 
