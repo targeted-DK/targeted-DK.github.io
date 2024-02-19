@@ -72,5 +72,9 @@ Max pooling takes the maximum value of given 'window'. For example, if F = 2, it
 - CNN pipeline(Every old school example)
 ![](/images/2024-02-18/18.png)
 
+- Receptive Field
+The receptive field of a unit is the region of the input feature map whose values contribute to the response of that unit (either in the previous layer or in the initial image) 
+![](/images/2024-02-18/19.png)
+
 
 
