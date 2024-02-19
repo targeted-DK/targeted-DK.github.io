@@ -13,7 +13,7 @@ Important Terms :
 - Bullet list item 2
 
 
-![Test](/images/2024-02-18-01.jpg)
+![Test](/images/2024-02-18-01.png)
 
 
 **Bold Text** and *Italic Text*.
