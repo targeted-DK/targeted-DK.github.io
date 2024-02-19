@@ -35,6 +35,7 @@ This is a description of one channel in, and one channel out. This cannot mix ac
 ![](/images/2024-02-18/12.png)
 ![](/images/2024-02-18/13.png)
 ![](/images/2024-02-18/14.png)
+
 The backward pass, also known as backpropagation, is a key mechanism through which neural networks learn. It involves the computation of gradients (partial derivatives) of the loss function with respect to the weights of the network, and then using these gradients to update the weights in a direction that minimizes the loss. The process is iterative, with the goal of reducing the difference between the predicted output of the network and the actual target values over many epochs (full training cycles).
 
 1. Forward Pass
