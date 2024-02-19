@@ -2,7 +2,7 @@
 layout: post
 title: "Convolutional Architecture"
 date: 2024-02-18
-categories: Computer Vision
+categories: ComputerVision
 ---
 
 ## Convolutional Architecture (From WashU CV Lecture 9 by Nathan Jacobs)
