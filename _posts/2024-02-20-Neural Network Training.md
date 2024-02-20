@@ -58,16 +58,14 @@ Adagrad adapts the learning rate on a per-parameter basis, allowing for more fre
 
 - RMSProp
 ![](/images/2024-02-20.2/10.png)
+
 Instead of accumulating like Adagrad, it decays the previous update. Instead of accumulating all past squared gradients, RMSProp uses a moving average, making it more suitable for training deep neural networks. 
 ​
 
 - Adam
 ![](/images/2024-02-20.2/11.png)
  
-Adam (Adaptive Moment Estimation) combines ideas from both Momentum and RMSProp. It maintains two moving averages for each weight: one for the gradients (like Momentum) and one for the squared gradients (like RMSProp). This is best default to use in practice - because of weight decaying in the recent history of updates, it is less sensitive to having a correct learning rate. So it is easier to pick a learning rate.
-
-
-
+Adam (Adaptive Moment Estimation) combines ideas from both Momentum and RMSProp. It maintains two moving averages for each weight: one for the gradients (like Momentum) and one for the squared gradients (like RMSProp). This is the best default to use in practice - because of weight decaying in the recent history of updates, it is less sensitive to having a correct learning rate. So it is easier to pick a learning rate.
 
 
 
@@ -77,9 +75,32 @@ Adam (Adaptive Moment Estimation) combines ideas from both Momentum and RMSProp.
 - Weight initialization
 - Batch normalization
 
+
+*Data augmentation*
+![](/images/2024-02-20.2/12.png)
+It increases variability and adds data points so that in provides more generalized model. Think it as adding a *specialized noise* to minic different variations of image and preserve the semantics of original image.
+This is a technique used in machine learning and deep learning to increase the diversity of a training dataset without actually collecting new data. This is achieved by applying a series of transformations that alter the training samples but do not change their labels. Data augmentation is particularly valuable in scenarios where acquiring additional labeled data is costly or impractical. It helps to prevent overfitting and improve the model's generalization capabilities by providing a broader set of variations to learn from.
+ 
+
+*Data Preprocessing*
+![](/images/2024-02-20.2/13.png)
+![](/images/2024-02-20.2/14.png)
+![](/images/2024-02-20.2/15.png)
+![](/images/2024-02-20.2/16.png)
+
+*Weight Initialization*
+![](/images/2024-02-20.2/17.png)
+
+
+*Batch Normalization(배치 정규화)*
+![](/images/2024-02-20.2/18.png)
+![](/images/2024-02-20.2/19.png)
+![](/images/2024-02-20.2/20.png)
+![](/images/2024-02-20.2/21.png)
+
+
+
+
 3. Regularization
 4. Test Time - averaging predictions and ensembles
-
-5. 
-![](/images/2024-02-20.2/01.png)
 
