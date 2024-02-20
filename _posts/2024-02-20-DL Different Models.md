@@ -59,7 +59,7 @@ The key innovation of ResNet is its use of residual blocks, where the input to a
 
 A residual block typically consists of a few convolutional layers followed by batch normalization and ReLU activations. The input to the block is added to the output of the block (after these layers) before applying the final activation function. This can be represented as:
 
-**Output\=Activation(F(x)+x)\\text{Output} = \\text{Activation}(F(x) + x)Output\=Activation(F(x)+x)**
+**Output $\=Activation(F(x)+x)\\text{Output} = \\text{Activation}(F(x) + x)Output\=Activation(F(x)+x)$ **
 
 *   F(x)F(x)F(x) represents the operations performed by the convolutional layers within the block.
 *   xxx is the input to the block.
