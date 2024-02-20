@@ -27,3 +27,27 @@ Use of ReLU (Rectified Linear Unit) Activation Function: Unlike sigmoid and tanh
 - Weight Initialization Techniques: Proper initialization of weights, such as He or Xavier initialization, can help in maintaining a stable gradient flow across layers.
 - Residual Networks (ResNets): These networks introduce skip connections that allow gradients to flow through the network more easily, bypassing some layers entirely.
 - Batch Normalization: This technique normalizes the inputs of each layer to have a mean of zero and a variance of one. This can help in preventing gradients from getting too small or too large.
+
+
+**Input / Output channel calculation** 
+![](/images/2024-02-20/02.png)
+
+
+2. ZFNet: ILSVRC 2013 winner
+![](/images/2024-02-20/03.png)
+
+3. VGGNet
+![](/images/2024-02-20/04.png)
+![](/images/2024-02-20/05.png)
+![](/images/2024-02-20/06.png)
+![](/images/2024-02-20/07.png)
+
+
+The key characteristics of VGGNet are its simplicity and depth. It uses a series of convolutional layers with small 3×3 receptive fields followed by max pooling layers. One of the main innovations of VGGNet was to demonstrate that the depth of the network is a critical component for achieving good performance, which they achieved by using many stacked convolutional layers.
+All convolutional layers use the same kernel size (3×3) and stride (1), with padding to preserve spatial dimensions. Max pooling is used to reduce the feature map by half after each block. The use of 3×3 convolutional filters in succession (stacking them) has a similar receptive field to larger filters but with fewer parameters and deeper representations. VGGNet is very homogeneous, only using 3×3 convolutions and 2×2 pooling from the start to the end of the network.
+
+
+5. GoogLeNET
+![](/images/2024-02-20/08.png)
+
+
