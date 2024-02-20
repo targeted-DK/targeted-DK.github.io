@@ -33,7 +33,7 @@ Use of ReLU (Rectified Linear Unit) Activation Function: Unlike sigmoid and tanh
 ![](/images/2024-02-20/02.png)
 
 
-2. ZFNet: ILSVRC 2013 winner
+2. ZFNet: ILSVRC 2013 winner 
 ![](/images/2024-02-20/03.png)
 
 3. VGGNet
