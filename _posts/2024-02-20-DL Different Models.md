@@ -47,11 +47,11 @@ The key characteristics of VGGNet are its simplicity and depth. It uses a series
 All convolutional layers use the same kernel size (3×3) and stride (1), with padding to preserve spatial dimensions. Max pooling is used to reduce the feature map by half after each block. The use of 3×3 convolutional filters in succession (stacking them) has a similar receptive field to larger filters but with fewer parameters and deeper representations. VGGNet is very homogeneous, only using 3×3 convolutions and 2×2 pooling from the start to the end of the network.
 
 
-5. GoogLeNet
+4. GoogLeNet
 ![](/images/2024-02-20/08.png)
 
 
-6. ResNet
+5. ResNet
 ![](/images/2024-02-20/09.png)
 ![](/images/2024-02-20/10.png)
 
@@ -67,6 +67,6 @@ This solves the vanishing gradient problem by gradients to flow directly into th
 
 
 
-8. DenseNet
+6. DenseNet
 ![](/images/2024-02-20/11.png)
 
