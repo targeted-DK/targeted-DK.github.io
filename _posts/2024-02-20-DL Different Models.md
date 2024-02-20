@@ -60,10 +60,12 @@ The key innovation of ResNet is its use of residual blocks, where the input to a
 A residual block typically consists of a few convolutional layers followed by batch normalization and ReLU activations. The input to the block is added to the output of the block (after these layers) before applying the final activation function. This can be represented as:
 
 **Output** = $Activation(F(x)+x)$
+*F(x)* represents the operations performed by the convolutional layers within the block.
+*x* is the input to the block.
+The operation *F(x)+x* is what constitutes the "residual connection," essentially allowing the block to learn a residual mapping.
+This solves the vanishing gradient problem by gradients to flow directly into the network, and allows deeper networks. ResNets are collections of many paths of different length, and **shorter paths** predominantly contribute to training. This makes it easy for network layers to represent the **identity mapping**. (Identitiy mapping refers to a function that passes its input directly to the output without any modification.)
 
-*   *F(x)* represents the operations performed by the convolutional layers within the block.
-*   *x* is the input to the block.
-*   The operation *F(x)+x* is what constitutes the "residual connection," essentially allowing the block to learn a residual mapping.
+
 
 8. DenseNet
 ![](/images/2024-02-20/11.png)
