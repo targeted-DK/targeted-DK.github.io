@@ -15,6 +15,21 @@ categories: ComputerVision
 
 Optimization in NN is an uncertain process - and may not be theoretically perfect. Improvements in training strategy is architectures makes it hard to see where contributions exactly come from. 
 
+**What is batch?**
+
+Data points are chosen for a batch through a process typically referred to as "batching," which can be implemented in various ways depending on the specific requirements of the training process and the desired outcomes. Here are some of the common strategies for selecting data points for a batch:
+
+1. Random Batching
+The most common method is **random batching**, where data points are randomly selected from the dataset to form a batch. This approach ensures that each batch is a representative sample of the dataset, which helps in generalizing the learning across the dataset. Random batching is implemented by **shuffling the entire dataset** at the beginning of each epoch and then partitioning it into batches of the specified size.
+
+2. Sequential Batching
+In some cases, especially when **dealing with time series data** or data where sequential order matters (e.g., text data for natural language processing tasks), data points are selected sequentially to maintain the temporal or logical sequence within each batch. This method respects the order of data, which is crucial for models like RNNs (Recurrent Neural Networks) that rely on the sequence of data points.
+
+3. Stratified Batching
+Stratified batching involves selecting data points in such a way that each batch **mirrors the distribution of classes** or key characteristics of the entire dataset. This approach is particularly useful in classification tasks where the dataset might be imbalanced, i.e., some classes are underrepresented compared to others. Stratified batching ensures that each batch contains a proportional number of samples from each class, helping the model learn more evenly across different classes.
+
+4. Balanced Batching
+Similar to stratified batching but more focused on balancing specific attributes, balanced batching ensures that batches are constructed to balance specific criteria, such as class distribution, but can also extend to other attributes like difficulty level, size of the input data, or other domain-specific characteristics. This method can be more complex to implement, as it requires a prior understanding or analysis of the dataset to define the balancing criteria.
 ![](/images/2024-02-20.2/01.png)
 Mini-batch SGD is to take a batch of size b and computer the gradient, average them, and update the weights. Hyperparameters are batch size, learning rate decay, and when to stop the iteration.
 
@@ -98,9 +113,29 @@ This is a technique used in machine learning and deep learning to increase the d
 ![](/images/2024-02-20.2/20.png)
 ![](/images/2024-02-20.2/21.png)
 
+*Other types of normalizations*
 
-
+![](/images/2024-02-20.2/22.png)
+- Layer Normalization (Ba et al., 2016) normalizes the inputs across the features for each training example. Unlike batch normalization, which normalizes across the batch dimension, layer normalization computes the normalization statistics (mean and variance) for each individual example and across all features. This makes it particularly effective for recurrent neural networks (RNNs) and situations where batch sizes are small. Key benefits: It reduces the impact of the internal covariate shift, leading to faster training and higher overall stability of the neural network. It also works well in situations where the batch size is variable or small.
+- Instance Normalization (Ulyanov et al., 2017) is similar to layer normalization but is used primarily in convolutional neural networks (CNNs), especially in tasks like style transfer. It normalizes the feature maps independently for each instance (image) in the batch, computing the mean and variance for each feature map separately. Key benefits: It helps models to generalize across changes in contrast, which is particularly useful in style transfer applications, where the contrast of the content image should not affect the style transfer.
+- Group Normalization (Wu and He, 2018)divides the channels (features) of each layer into groups and normalizes the features within each group. This is useful because it doesn't depend on the batch size, making it suitable for tasks where batch sizes are small or vary significantly. Key benefits: It provides a middle ground between instance normalization and layer normalization, offering benefits in a wide range of tasks, particularly when batch sizes are small or when using highly variable data.
+- Weight Normalization (Salimans et al., 2016) is a technique that decouples the magnitude of the weights from their direction, which helps to speed up convergence by improving the conditioning of the optimization problem. It normalizes the weights of each neuron to have unit norm, which is a different approach from the other normalization techniques that focus on the activations. Key benefits: It can lead to faster convergence by reducing the complexity of the optimization landscape. It's particularly useful in optimizing deep networks and can be combined with other normalization methods for improved performance.
 
 3. Regularization
-4. Test Time - averaging predictions and ensembles
+![](/images/2024-02-20.2/23.png)
+![](/images/2024-02-20.2/24.png)
+![](/images/2024-02-20.2/25.png)
+
+It is important to note that a higher hyperparameter makes the model simpler by **adding** penalties. In other words, The idea is to add an extra term to the loss function, which increases the total loss based on the magnitude of the model parameters (weights). This encourages the model to keep the weights small, which in turn simplifies the model. 
+
+*   **L1 Regularization (Lasso):** Adds a penalty equal to the absolute value of the magnitude of coefficients. This can lead to coefficients being reduced to zero, effectively selecting a simpler model by excluding some features.
+    
+   $ L\=Loriginal+λ∑i\=1n∣wi∣L = L\_{original} + \\lambda \\sum\_{i=1}^{n} |w\_i|L\=Loriginal​+λ∑i\=1n​∣wi​∣ $
+    
+*   **L2 Regularization (Ridge):** Adds a penalty equal to the square of the magnitude of coefficients. This discourages large weights but does not set them to zero, leading to a model where the contribution of each feature is minimized but not entirely excluded.
+    
+  $  L\=Loriginal+λ∑i\=1nwi2L = L\_{original} + \\lambda \\sum\_{i=1}^{n} w\_i^2L\=Loriginal​+λ∑i\=1n​wi2​ $
+
+
+5. Test Time - averaging predictions and ensembles
 
