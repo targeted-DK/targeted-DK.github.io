@@ -130,11 +130,11 @@ It is important to note that a higher hyperparameter makes the model simpler by 
 
 *   **L1 Regularization (Lasso):** Adds a penalty equal to the absolute value of the magnitude of coefficients. This can lead to coefficients being reduced to zero, effectively selecting a simpler model by excluding some features.
     
- $L = L_{\text{original}} + \lambda \sum_{i=1}^{n} |w_i|$
+ $L = L_{\text{original}} + \lambda\sum_{i=1}^{n} |w_i|$
     
 *   **L2 Regularization (Ridge):** Adds a penalty equal to the square of the magnitude of coefficients. This discourages large weights but does not set them to zero, leading to a model where the contribution of each feature is minimized but not entirely excluded.
     
-$ L = L_{\text{original}} + \lambda \sum_{i=1}^{n} w_i^2 $
+$L = L_{\text{original}} + \lambda\sum_{i=1}^{n} w_i^2$
 
 
 
