@@ -7,7 +7,7 @@ categories: ComputerVision
 
 ## Neural Network Training
 
-1. Optimizations
+# Optimizations
 - Mini-batch SGD
 - Learning rate decay
 - Diagnosing learning curves
@@ -84,7 +84,7 @@ Adam (Adaptive Moment Estimation) combines ideas from both Momentum and RMSProp.
 
 
 
-2. Massaging the numbers
+# Massaging the numbers
 - Data augmentation
 - Data preprocessing
 - Weight initialization
@@ -121,7 +121,7 @@ This is a technique used in machine learning and deep learning to increase the d
 - Group Normalization (Wu and He, 2018)divides the channels (features) of each layer into groups and normalizes the features within each group. This is useful because it doesn't depend on the batch size, making it suitable for tasks where batch sizes are small or vary significantly. Key benefits: It provides a middle ground between instance normalization and layer normalization, offering benefits in a wide range of tasks, particularly when batch sizes are small or when using highly variable data.
 - Weight Normalization (Salimans et al., 2016) is a technique that decouples the magnitude of the weights from their direction, which helps to speed up convergence by improving the conditioning of the optimization problem. It normalizes the weights of each neuron to have unit norm, which is a different approach from the other normalization techniques that focus on the activations. Key benefits: It can lead to faster convergence by reducing the complexity of the optimization landscape. It's particularly useful in optimizing deep networks and can be combined with other normalization methods for improved performance.
 
-3. Regularization
+# Regularization
 ![](/images/2024-02-20.2/23.png)
 ![](/images/2024-02-20.2/24.png)
 ![](/images/2024-02-20.2/25.png)
