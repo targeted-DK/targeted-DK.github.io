@@ -32,7 +32,7 @@ A GAN consists of two neural networks: a **generator (G)** and a **discriminator
 
 **Adversarial Training Process:** The training involves a min-max game where the generator tries to minimize the following objective function while the discriminator tries to maximize it:
 
-$min⁡Gmax⁡DV(D,G)\=Ex∼pdata(x)\[log⁡D(x)\]+Ez∼pz(z)\[log⁡(1−D(G(z)))\]\\min\_{G} \\max\_{D} V(D, G) = \\mathbb{E}\_{x \\sim p\_{\\text{data}}(x)}\[\\log D(x)\] + \\mathbb{E}\_{z \\sim p\_{z}(z)}\[\\log (1 - D(G(z)))\]minG​maxD​V(D,G)\=Ex∼pdata​(x)​\[logD(x)\]+Ez∼pz​(z)​\[log(1−D(G(z)))\]$
+$minG​maxD​V(D,G)\=Ex∼pdata​(x)​\[logD(x)\]+Ez∼pz​(z)​\[log(1−D(G(z)))\]$
 
-Here, pdata(x)p\_{\\text{data}}(x)pdata​(x) is the real data distribution, and pz(z)p\_{z}(z)pz​(z) is the distribution of the generator's input noise.
+Here,$p\_{\\text{data}}(x)$ is the real data distribution, and $p\_{z}$ is the distribution of the generator's input noise.
 
