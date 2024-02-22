@@ -112,6 +112,9 @@ This is a technique used in machine learning and deep learning to increase the d
 ![](/images/2024-02-20.2/19.png)
 ![](/images/2024-02-20.2/20.png)
 ![](/images/2024-02-20.2/21.png)
+![](/images/2024-02-20.2/21.2.png)
+
+Batch normalization is pretty safe to add to any architecture. It makes model more robust in general, and simplifies a lot of choices - If things are not working well, always try to add batch normalization. (Dimensions may not line up so be careful with this). IF you have very small mini-batches, mean and sd are going to be very noisy. 
 
 *Other types of normalizations*
 
@@ -125,6 +128,8 @@ This is a technique used in machine learning and deep learning to increase the d
 ![](/images/2024-02-20.2/23.png)
 ![](/images/2024-02-20.2/24.png)
 ![](/images/2024-02-20.2/25.png)
+
+
 
 It is important to note that a higher hyperparameter makes the model simpler by **adding** penalties. In other words, The idea is to add an extra term to the loss function, which increases the total loss based on the magnitude of the model parameters (weights). This encourages the model to keep the weights small, which in turn simplifies the model. 
 
@@ -141,4 +146,19 @@ $L = L_{\text{original}} + \lambda\sum_{i=1}^{n} w_i^2$
 
 
 5. Test Time - averaging predictions and ensembles
+
+This gives you an extra percent in accuracy at the cost of computation time. (Taking multiple crops of test images and averaging them, as shown below image)
+![](/images/2024-02-20.2/27.png)
+![](/images/2024-02-20.2/28.png)
+
+6. Transfer Learning
+
+# Distillation
+
+It's done for a few different reasons - the idea is to have *teacher network* - a large network trained. We are going to take this model and predict from this teach model. Images we push through teacher models do not have to be labeled. Then, we can take predictions and keep the ones that have high confidence. So it is a way to get 3 labels for arbitrary large dataset. (Pseudo labels). 
+
+![](/images/2024-02-20.2/29.png)
+![](/images/2024-02-20.2/30.png)
+![](/images/2024-02-20.2/31.png)
+
 
