@@ -7,4 +7,7 @@ categories: ComputerVision
 
 ## Local Features
 
+# Correspondence Estimation
+Is this point in this image the same as the other image? This is used for recognition, geometry estimations etc.
+
 
