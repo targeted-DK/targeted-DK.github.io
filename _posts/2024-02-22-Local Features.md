@@ -82,7 +82,7 @@ The response function RRR has the following interpretations based on the eigenva
 
 *   If both $λ1\\lambda\_1λ1$​ and $λ2\\lambda\_2λ2​$ are small, which means the gradients are small in all directions, R will be small, and the pixel is likely to be part of a flat region.
 *   If one eigenvalue is high and the other is low, RRR will also be low, indicating an edge.
-*   If both $λ1\\lambda\_1λ1$​ and $λ2\\lambda\_2λ2$​ are high, and hence $det⁡(M)\\det(M)det(M)$ is high and $trace(M)\\text{trace}(M)trace(M)$ is moderate, R will be high, indicating a corner.
+*   If both $λ1\\lambda\_1λ1$​ and $λ2\\lambda\_2λ2$​ are high, and hence $det⁡(M)$ is high and $trace(M)$ is moderate, R will be high, indicating a corner.
 
 
 ![](/images/2024-02-22/40.png)
