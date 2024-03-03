@@ -61,29 +61,35 @@ Hysteresis thresholding is a technique used primarily in image processing to det
 
 # Harris Corner Detector
 The Harris Corner Detector is a popular method used in computer vision to detect corners within an image. It was introduced by Chris Harris and Mike Stephens in their paper "A Combined Corner and Edge Detector" in 1988. The algorithm identifies regions in an image that have significant changes in intensity in all directions, which are typically indicative of corners.
-1.  **Compute the Gradient**: Calculate the x and y derivatives of the image to get two images which represent changes in intensity in both directions.
-    
-2.  **Compute the Structure Tensor**: For each pixel in the image, a 2x2 matrix (also known as the Harris Matrix) is computed, which contains sums of products of derivatives at each pixel. The matrix is given by:
-    
-    $M\=∑x,yw(x,y)\[Ix2IxIyIxIyIy2\]M = \\sum\_{x,y} w(x, y) \\begin{bmatrix} I\_x^2 & I\_xI\_y \\\\ I\_xI\_y & I\_y^2 \\end{bmatrix}M\=x,y∑​w(x,y)\[Ix2​Ix​Iy​​Ix​Iy​Iy2​​\]$
-    
-    where $IxI\_xIx​ and IyI\_yIy$​ are the x and y derivatives of the image, w(x,y)w(x, y)w(x,y) is a window function (often a Gaussian) that gives weights to pixels around the central pixel.
-    
-3.  **Response Calculation**: For each pixel, calculate the response function RRR using the determinant and trace of the matrix MMM, given by:
-    
-    $R\=det(M)−k⋅(trace(M))2R = \\text{det}(M) - k \\cdot (\\text{trace}(M))^2R\=det(M)−k⋅(trace(M))2$
-    
-    where $det(M)\=λ1λ2\\text{det}(M) = \\lambda\_1 \\lambda\_2det(M)\=λ1​λ2​$ (product of the eigenvalues of MMM), trace(M)\=λ1+λ2\\text{trace}(M) = \\lambda\_1 + \\lambda\_2trace(M)\=λ1​+λ2​, and kkk is a sensitivity factor, typically around 0.04 to 0.06.
-    
-4.  **Thresholding and Non-Maximum Suppression**: Apply a threshold to RRR to determine potential corners. To get a precise localization of corners, non-maximum suppression is applied, which means keeping locations with a local maximum of RRR and discarding all others.
-    
 
-Significance and Usage
+![](/images/2024-02-22/30.png)
+![](/images/2024-02-22/31.png)
+![](/images/2024-02-22/32.png)
+![](/images/2024-02-22/33.png)
+![](/images/2024-02-22/34.png)
+![](/images/2024-02-22/35.png)
+![](/images/2024-02-22/36.png)
+![](/images/2024-02-22/37.png)
+![](/images/2024-02-22/38.png)
+![](/images/2024-02-22/39.png)
+The use of inverse root of eigenvalues for the axis lengths of the ellipse provides a geometric interpretation of the gradient information encoded in the second moment matrix, illustrating the rate of intensity change around a point in an image. This interpretation is particularly useful in corner detection, as corners will have relatively balanced, high values for both eigenvalues, resulting in a more circular ellipse (indicating significant intensity changes in all directions).
+$R\=det(M)−k(trace(M))$
+*   det(M) is the determinant of the second moment matrix M, which can also be expressed as $λ1λ2\\lambda\_1 \\lambda\_2λ1​λ2​$ (the product of the eigenvalues).
+*   $trace(M)\\text{trace}(M)trace(M)$ is the trace of the matrix M, which is the sum of its eigenvalues $λ1+λ2\\lambda\_1 + \\lambda\_2λ1​+λ2$​.
+*   k is an empirically determined sensitivity factor, usually in the range of 0.04 to 0.06.
 
-The Harris Corner Detector is widely used in image processing, computer vision, and related fields for feature detection. Corners detected by this method can be used for various applications, such as image matching, motion detection, and tracking, 3D modeling, and object recognition.
+The response function RRR has the following interpretations based on the eigenvalues:
 
-One of the key advantages of the Harris Corner Detector is its invariance to rotation, which makes it robust in identifying corners regardless of the image orientation. However, it is not entirely scale-invariant, meaning it might not detect the same corners if the image size changes significantly. To address this, variations and extensions of the original algorithm, such as the Harris-Laplace and Harris-Affine detectors, have been developed to include scale invariance.
-
-
+*   If both $λ1\\lambda\_1λ1$​ and $λ2\\lambda\_2λ2​$ are small, which means the gradients are small in all directions, R will be small, and the pixel is likely to be part of a flat region.
+*   If one eigenvalue is high and the other is low, RRR will also be low, indicating an edge.
+*   If both $λ1\\lambda\_1λ1$​ and $λ2\\lambda\_2λ2$​ are high, and hence $det⁡(M)\\det(M)det(M)$ is high and $trace(M)\\text{trace}(M)trace(M)$ is moderate, R will be high, indicating a corner.
 
 
+![](/images/2024-02-22/40.png)
+![](/images/2024-02-22/41.png)
+
+The corner response function R is calculated for every pixel in the image, and it is based on the eigenvalues of the second moment matrix M (also known as the autocorrelation matrix or the Harris matrix) for that pixel. The second moment matrix is derived from the gradients of the image, which capture the intensity changes in the local neighborhood of the pixel.
+
+
+![](/images/2024-02-22/42.png)
+![](/images/2024-02-22/43.png)
