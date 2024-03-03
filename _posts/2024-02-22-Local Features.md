@@ -84,11 +84,17 @@ The response function RRR has the following interpretations based on the eigenva
 *   If one eigenvalue is high and the other is low, RRR will also be low, indicating an edge.
 *   If both $\lambda\_1​ and $\lambda\_2$​ are high, and hence $det⁡(M)$ is high and $trace(M)$ is moderate, R will be high, indicating a corner.
 
+The subtraction of two terms in the equation serves to reduce the corner response for edge-like structures. For an edge, one eigenvalue will be large, and the other will be small, making the determinant small, but the trace will still be relatively large due to the contribution of the larger eigenvalue. Subtracting the squared trace penalizes situations where one eigenvalue is much larger than the other, which is typical for edges.
+
+So, the corner response function takes into account both the magnitude of the gradients and the isotropy of the gradient distribution. If the gradients are high and isotropic (i.e., similar in all directions), the function yields a high value indicating a corner. If the gradients are high but anisotropic (i.e., in one direction), or if they are low, the function yields a lower value, indicating an edge or a flat region, respectively.
+
+
 
 ![](/images/2024-02-22/40.png)
 ![](/images/2024-02-22/41.png)
 
 The corner response function R is calculated for every pixel in the image, and it is based on the eigenvalues of the second moment matrix M (also known as the autocorrelation matrix or the Harris matrix) for that pixel. The second moment matrix is derived from the gradients of the image, which capture the intensity changes in the local neighborhood of the pixel.
+
 
 
 ![](/images/2024-02-22/42.png)
