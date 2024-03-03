@@ -65,15 +65,15 @@ The Harris Corner Detector is a popular method used in computer vision to detect
     
 2.  **Compute the Structure Tensor**: For each pixel in the image, a 2x2 matrix (also known as the Harris Matrix) is computed, which contains sums of products of derivatives at each pixel. The matrix is given by:
     
-    M\=∑x,yw(x,y)\[Ix2IxIyIxIyIy2\]M = \\sum\_{x,y} w(x, y) \\begin{bmatrix} I\_x^2 & I\_xI\_y \\\\ I\_xI\_y & I\_y^2 \\end{bmatrix}M\=x,y∑​w(x,y)\[Ix2​Ix​Iy​​Ix​Iy​Iy2​​\]
+    $M\=∑x,yw(x,y)\[Ix2IxIyIxIyIy2\]M = \\sum\_{x,y} w(x, y) \\begin{bmatrix} I\_x^2 & I\_xI\_y \\\\ I\_xI\_y & I\_y^2 \\end{bmatrix}M\=x,y∑​w(x,y)\[Ix2​Ix​Iy​​Ix​Iy​Iy2​​\]$
     
-    where IxI\_xIx​ and IyI\_yIy​ are the x and y derivatives of the image, w(x,y)w(x, y)w(x,y) is a window function (often a Gaussian) that gives weights to pixels around the central pixel.
+    where $IxI\_xIx​ and IyI\_yIy$​ are the x and y derivatives of the image, w(x,y)w(x, y)w(x,y) is a window function (often a Gaussian) that gives weights to pixels around the central pixel.
     
 3.  **Response Calculation**: For each pixel, calculate the response function RRR using the determinant and trace of the matrix MMM, given by:
     
-    R\=det(M)−k⋅(trace(M))2R = \\text{det}(M) - k \\cdot (\\text{trace}(M))^2R\=det(M)−k⋅(trace(M))2
+    $R\=det(M)−k⋅(trace(M))2R = \\text{det}(M) - k \\cdot (\\text{trace}(M))^2R\=det(M)−k⋅(trace(M))2$
     
-    where det(M)\=λ1λ2\\text{det}(M) = \\lambda\_1 \\lambda\_2det(M)\=λ1​λ2​ (product of the eigenvalues of MMM), trace(M)\=λ1+λ2\\text{trace}(M) = \\lambda\_1 + \\lambda\_2trace(M)\=λ1​+λ2​, and kkk is a sensitivity factor, typically around 0.04 to 0.06.
+    where $det(M)\=λ1λ2\\text{det}(M) = \\lambda\_1 \\lambda\_2det(M)\=λ1​λ2​$ (product of the eigenvalues of MMM), trace(M)\=λ1+λ2\\text{trace}(M) = \\lambda\_1 + \\lambda\_2trace(M)\=λ1​+λ2​, and kkk is a sensitivity factor, typically around 0.04 to 0.06.
     
 4.  **Thresholding and Non-Maximum Suppression**: Apply a threshold to RRR to determine potential corners. To get a precise localization of corners, non-maximum suppression is applied, which means keeping locations with a local maximum of RRR and discarding all others.
     
