@@ -74,15 +74,15 @@ The Harris Corner Detector is a popular method used in computer vision to detect
 ![](/images/2024-02-22/39.png)
 The use of inverse root of eigenvalues for the axis lengths of the ellipse provides a geometric interpretation of the gradient information encoded in the second moment matrix, illustrating the rate of intensity change around a point in an image. This interpretation is particularly useful in corner detection, as corners will have relatively balanced, high values for both eigenvalues, resulting in a more circular ellipse (indicating significant intensity changes in all directions).
 $R\=det(M)−k(trace(M))$
-*   det(M) is the determinant of the second moment matrix M, which can also be expressed as $λ1λ2\\lambda\_1 \\lambda\_2λ1​λ2​$ (the product of the eigenvalues).
+*   det(M) is the determinant of the second moment matrix M, which can also be expressed as $λ1λ2\\lambda\_1 \\lambda\_2λ1​λ$ (the product of the eigenvalues).
 *   $trace(M)\\text{trace}(M)trace(M)$ is the trace of the matrix M, which is the sum of its eigenvalues $λ1+λ2\\lambda\_1 + \\lambda\_2λ1​+λ2$​.
 *   k is an empirically determined sensitivity factor, usually in the range of 0.04 to 0.06.
 
 The response function RRR has the following interpretations based on the eigenvalues:
 
-*   If both $λ1\\lambda\_1λ1$​ and $λ2\\lambda\_2λ2​$ are small, which means the gradients are small in all directions, R will be small, and the pixel is likely to be part of a flat region.
+*   If both $\lambda\_1$​ and $\lambda\_2λ$ are small, which means the gradients are small in all directions, R will be small, and the pixel is likely to be part of a flat region.
 *   If one eigenvalue is high and the other is low, RRR will also be low, indicating an edge.
-*   If both $λ1\\lambda\_1λ1$​ and $λ2\\lambda\_2λ2$​ are high, and hence $det⁡(M)$ is high and $trace(M)$ is moderate, R will be high, indicating a corner.
+*   If both $\lambda\_1​ and $\lambda\_2$​ are high, and hence $det⁡(M)$ is high and $trace(M)$ is moderate, R will be high, indicating a corner.
 
 
 ![](/images/2024-02-22/40.png)
