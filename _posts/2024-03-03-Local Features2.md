@@ -71,6 +71,10 @@ The MSER algorithm can be summarized in the following steps:
 The Chi-squared $(χ2\\chi^2χ2)$ distance is a statistical measure commonly used in computer vision and image processing to compare histograms, making it particularly useful for tasks like histogram matching, texture analysis, and object recognition. The $χ2\\chi^2χ2$ distance is used to determine how different two histograms are, with a lower distance indicating more similar histograms.
 
 ![](/images/2024-03-03/18.png)
+![](/images/2024-03-03/19.png)
+![](/images/2024-03-03/20.png)
+![](/images/2024-03-03/21.png)
+![](/images/2024-03-03/22.png)
 
 The HOG descriptor works by dividing the image into small connected regions, referred to as cells, and for each cell, compiling a histogram of gradient directions or edge orientations for the pixels within the cell. The combination of these histograms then represents the descriptor. Here's a simplified overview of how the HOG descriptor is computed:
 
