@@ -8,5 +8,5 @@ categories: Machine Learning
 
 There are two way to handle non-linear maching learning model : 
 1) k-nearest neighbors
-     - Classification : $h(x) = sign (\sigma y_i)$
+     - Classification : $h(x) = sign (\Sigma y_i)$
      - Regression : 
