@@ -61,7 +61,7 @@ $\mu$ -> k number of centers
 
 1) Choose any $\mu_{j}$ to represent $bx_{i}$(this is a bump using test point)
 2) Compute $z_{i}$ for all $bx_{i}$ in D
-3) Fit a linear model $h(x) = w^{T}z$ using $D = {(z_{i}, y_{i)}^{n}_{i=1}$
+3) Fit a linear model $h(x) = w^{T}z$ using $D = (z_{i}, y_{i})^{n}_{i=1}$
 
 
 
