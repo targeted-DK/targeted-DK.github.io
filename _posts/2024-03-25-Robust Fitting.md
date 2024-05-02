@@ -45,13 +45,27 @@ Repeat 𝑁 times:
 ![](/images/2024-03-25/8.png)
 
 ## Hough Transform
+1. Edge detection: The first step in applying the Hough Transform is to detect edges in the image, typically using an edge detector (like the Canny edge detector).
+2. Mapping to Hough space: Each point on an edge in image space can be associated with several possible shapes. The Hough Transform maps these points into a parameter space (called Hough space) where each point on an edge votes for all the parameters that would correspond to a curve passing through it. For example, in the case of line detection, each point votes for all the lines that pass through it.
 ![](/images/2024-03-25/9.png)
+### Basically, for every y=mx+bequation, (m,b) becomes a point in parameter space(hough space)
+### Line (Image Space) -> Point (Hough space)
+### Point (Image Space) -> Line (Hough space)
+
+### However, we would prefer to use polar representation due to infinite parameter space in the domain for (m,b)
+4. Parameter space and voting: In Hough space, each set of parameters defines a potential shape in the original image. When multiple edge points in the image space agree on a single set of parameters in the parameter space, it indicates a strong candidate for a shape in the original image.
+5. Detecting shapes: By finding local maxima in the accumulator space (a discretized version of the parameter space where votes are accumulated), one can identify the parameters of the shapes present in the image.
+
 ![](/images/2024-03-25/10.png)
 ![](/images/2024-03-25/11.png)
 ![](/images/2024-03-25/12.png)
 ![](/images/2024-03-25/13.png)
 ![](/images/2024-03-25/14.png)
 ![](/images/2024-03-25/15.png)
+
+## Generalized Hough Transform
+
+![](/images/2024-03-25/16.png)
 
 
 
