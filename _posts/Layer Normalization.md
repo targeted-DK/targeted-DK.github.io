@@ -22,7 +22,7 @@ categories: papers
 - Summed input for RNNs vary in length, making it difficult to apply.
 - Not applicable to online learning tasks / large distributed models with small mini-batches.
 - Gradients with respect to the weights in one layer are highly dependent on the outputs of the neurons in the previous layer especially if these outputs change in a highly correlated way.
-- ![](/images/2024-02-20/01.png)
+![](/images/2024-06-09/01.png)
 (batch norm, which rescales based on the variance of the dataset, which would need forward pass of through the entire dataset).
 - Therefore, we use the mean and standard deviation of the mini-batch dataset, and is hardly applicable to RNNs.
 
@@ -31,7 +31,7 @@ categories: papers
 
 ## Layer Normalization
 - First, calculate layer normalization statistics over all the hidden units in the same layer as follows:
-![](/images/2024-02-20/02.png)
+![](/images/2024-06-09/02.png)
 - The above equation indicates no constraints on mini-batches
 - $\bar{a}^{l}_{i}$ is normalized summed inputs to the $i$th hidden unit in the $l$th layer
 - $g_{i}$ is a gain parameter scaling the normalized activation before the non-linear activation function. 
