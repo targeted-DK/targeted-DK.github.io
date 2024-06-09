@@ -6,9 +6,9 @@ categories: papers
 ---
 
 ## Abstract
-  - Deep learning is computationally expensive
-  - We can fix this by normalizing the activities of neurons, such as batch normalization
-  - Batch normalization uses summed input to a neuron to compute an mean and variance to normalize summed input for each training case
+  - Deep learning is computationally expensive.
+  - We can fix this by normalizing the activities of neurons, such as batch normalization.
+  - Batch normalization uses summed input to a neuron to compute an mean and variance to normalize summed input for each training case.
   - This paper converts batch normalization to layer norm for a single training case.
   - Layer normalization is very effective at stabilizing the hidden state dynamics in recurrent networks.
     
@@ -21,6 +21,7 @@ categories: papers
 # Problems
 - Summed input for RNNs vary in length, making it difficult to apply.
 - Not applicable to online learning tasks / large distributed models with small mini-batches.
+- Gradients with respect to the weights in one layer are highly dependent on the outputs of the neurons in the previous layer especially if these outputs change in a highly correlated way.
 
 # Solutions
 - Does not use any dependencies between training cases as it estimates the normalization statistics from the summed inputs to the neurons within a hidden layer so the normalization
