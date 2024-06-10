@@ -5,6 +5,8 @@ date: 2024-06-09
 categories: papers
 ---
 
+# Layer Normalization 
+
 # Abstract
   - Deep learning is computationally expensive.
   - We can fix this by normalizing the activities of neurons, such as batch normalization.
