@@ -5,7 +5,7 @@ date: 2024-04-11
 categories: ComputerVision
 ---
 
-
+# Architectures
 
 # RetinaNet
 RetinaNet is a popular and effective deep learning framework for object detection, introduced by Facebook AI Research (FAIR) in a 2017 paper titled "Focal Loss for Dense Object Detection." It addresses one of the central challenges in object detection: the imbalance between foreground and background classes during training, particularly when dealing with extreme cases where background (negative) examples vastly outnumber the foreground (positive) examples.
