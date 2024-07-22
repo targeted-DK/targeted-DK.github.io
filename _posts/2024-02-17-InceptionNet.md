@@ -75,3 +75,8 @@ increase in the number of outputs from stage to stage.)
 2. work was competitive despite of neither utilizing context nor performing bounding box regression
 3. moving to sparser architectures is feasible and useful idea in general.
 
+## 요약
+1. 여러 필터 결과물을 concatenate해서 사용
+2. 1x1 합성곱을 통한 차원 축소(=매개 변수 감소)
+3. auxiliary classifier를 사용하여 vanishing gredient 줄임
+4. VGGNet보다 적은 매개변수 수
