@@ -57,7 +57,7 @@ increase in the number of outputs from stage to stage.)
 ![](/images/InceptionNet/7.png)
 1. average pooling으로는 5x5 필터와 stride 값은 3을 사용하여 위 표에 나와았는 4a, 4d 단계에 각각 4×4×512, 4×4×528이 출력됨.
 2. 1x1 합성곱으로 128개의 필터가 차원축소(dimension reduction)에 사용되었으며 ReLu가 사용됨.
-3. 완전 연결층(FC layer)의 경우 1024의 개체가 사용되었으며 ReLu가 사용됨. A fully connected layer with 1024 units and rectified linear activation.
+3. 완전 연결층(FC layer)의 경우 1024의 개체가 사용되었으며 ReLu가 사용됨.
 4. Dropout 비율은 79%.
 5. Softmax loss is used for loss calculation.
 
@@ -71,7 +71,7 @@ increase in the number of outputs from stage to stage.)
 - 4*3*2(mirrored)*6(4+1+1(original image resized to 224x224) = 144 images
 
 ## Conclusion
-1. significant quality gain at a modest in- crease of computational requirements
+1. significant quality gain at a modest increase of computational requirements
 2. work was competitive despite of neither utilizing context nor performing bounding box regression
 3. moving to sparser architectures is feasible and useful idea in general.
 
