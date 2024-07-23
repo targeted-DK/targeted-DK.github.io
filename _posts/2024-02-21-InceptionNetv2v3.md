@@ -16,23 +16,25 @@ InceptionNet v2와 v3는 기존 모델을 효율성은 유지하면서 모델을
 
 ### Avoid representational bottlenecks, especially early in the network.
 - 기본적으로 Feed-forward network은 한 방향으로 정보가 흐르기 때문에 각 레이어 사이에서 정보의 흐름을 확인할 수 있다. 일반적으로 representation 크기는 하류로 갈 수록 서서히 감소해야하는데, 이는 representation의 차원이
-- 상관 구조 관계를 내포하고 있기 때문이다. ( Theoretically, infor- mation content can not be assessed merely by the di- mensionality of the representation as it discards important factors like correlation structure)
+- 상관 구조 관계를 내포하고 있기 때문이다. ( Theoretically, information content can not be assessed merely by the dimensionality of the representation as it discards important factors like correlation structure)
 - 차원 크기는 정보의 내용만 어림 잡을 수 있게 해준다.
 
 ### Higher dimensional representations are easier to process locally within a network. 
-- 합성곱 타일 당 activation 숫자를 증가시키면 feature를 더 자세하게 해석할 수 있다.
+- 합성곱 타일(unit) 당 activation 숫자를 증가시키면 feature를 더 자세하게 해석할 수 있다.
 
 ### Spatial aggregation 
-- 공간 응집(spatial aggregation)는 저차원 임베딩으로 representation(데이터) 손실 없이 실행할 수 있다. 즉 input representation의 차원을 축소하더라도 각 데이터는 근처 데이터와 유사하기 때문에 출력물을 공간 응집에
-- 사용할 수 있다. 즉 차원 축소는 좀 더 빠른 훈련을 가능하게 한다.
+- 공간 응집(spatial aggregation)dms 저차원 임베딩으로 representation(데이터) 손실 없이 실행할 수 있다. 즉 input representation의 차원을 축소하더라도 각 데이터는 근처 데이터와 유사하기 때문에 출력물을 공간 응집에 사용할 수 있다. 즉 차원 축소는 좀 더 빠른 훈련을 가능하게 한다.
 
 ###  Balance the width and depth of the network.
 - 연산력을 모델 네트워크의 깊이와 너비에 고루 분포하여 사용해 한다.
 
 
 ## Factorizing Convolutions with Large Filter Size
-대부분의 GoogLeNet의 장점은 차원축소에서 비롯되었다. 
+대부분의 GoogLeNet의 장점은 차원 축소에서 비롯되었고, 차원 축소는 필요 연산력을 감소시키기 때문에 적합한 factorization을 통해 더 압축된 매개 변수와 빠른 훈련에 필요하다. 
+Therefore, any reduction in computational cost results in reduced number of param- eters. This means that with suitable factorization, we can end up with more disentangled parameters and therefore with faster training. 
 
+### Factorization into smaller convolutions
+연구에서는 factorization(분해)를 여러 개의 작은 합성곱으로 나누는 것으로 정의한다. 5x5 합성곱은 3x3합성곱 한 개에 비해 연산량이 (5*5)/(3*3) = 2.78배 비싸다. 다만 
 
 ![](/images/InceptionNet/1.png)
 
