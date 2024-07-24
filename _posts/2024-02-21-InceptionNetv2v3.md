@@ -88,6 +88,7 @@ $$
 \frac_{\partial l}{\partial z_{k} = p(k) - q(k) 
 $$
 
+
 이 연구에서는 one-hot encoding은 모델이 too-confident 하게 만들기 때문에 label smoothing을 사용하여 덜 확신에 차게 하도록 구현하였다. 
 
 #### label-smoothing regularization(LSR)
