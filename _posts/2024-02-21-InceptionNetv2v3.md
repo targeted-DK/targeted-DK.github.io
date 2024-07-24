@@ -71,23 +71,23 @@ representational bottleneck(표현 병목)을 피하기위해 먼저 인셉션 �
 #### Model Regularization via Label Smoothing
 
 각 데이터 x에 대하여 label k 값을
-```
+
 $$
 p(k|x) = \frac{\exp(z_{k})}{\sum_{{i=1}^{K}} \exp(z_{i})}
 $$
-```
+
 또한 cross-entropy를 사용한 손실 함수는
-```
+
 $$
 l = -\sum_{k=1}^{K} log(p(k))q(k)
 $$
-```
+
 q(k)경우 ground-truth label 이며, $z_{k}$ 에 대한 교차엔트로피 함수는 미분이 가능하여 훈련에 사용가능함. 미분값(기울기)는 다음과 같으며 범위는 -1 에서 1로 제한됨.
-```
+
 $$
 \frac_{\partial l}{\partial z_{k} = p(k) - q(k) 
 $$
-```
+
 이 연구에서는 one-hot encoding은 모델이 too-confident 하게 만들기 때문에 label smoothing을 사용하여 덜 확신에 차게 하도록 구현하였다. 
 
 #### label-smoothing regularization(LSR)
