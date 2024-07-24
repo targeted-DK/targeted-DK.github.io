@@ -42,12 +42,13 @@ Therefore, any reduction in computational cost results in reduced number of para
 
 ### Spatial Factorization into Asymmetric Convolutions
 ![](/images/InceptionNetv2v3/2.png)
+
 위에서는 nxn 필터를 더 작은 mxm 필터로 구현하고 했지만, 항상 성능 향상을 보장하지 않아서 이번에는 nxn필터를 1xm 과 mx1필터로 구현하려고 한다. 이런 경우, 기존의 인셉션 모델이 다음과 같이 변형된다. 
 
 ![](/images/InceptionNetv2v3/3.png)
 ![](/images/InceptionNetv2v3/4.png)
 
-In practice, we have found that employing this factorization does not work well on early layers, but it gives very good re- sults on medium grid-sizes (On m × m feature maps, where m ranges between 12 and 20). On that level, very good re- sults can be achieved by using 1 × 7 convolutions followed by 7 × 1 convolutions.
+In practice, we have found that employing this factorization does not work well on early layers, but it gives very good re- sults on medium grid-sizes (On m × m feature maps, where m ranges between 12 and 20). On that level, very good results can be achieved by using 1 × 7 convolutions followed by 7 × 1 convolutions.
 
 ![](/images/InceptionNetv2v3/5.png)
 ![](/images/InceptionNetv2v3/6.png)
@@ -58,14 +59,13 @@ Instead, we argue that the auxiliary clas- sifiers act as regularizer.
 
 
 ## Efficient Grid Size Reduction
-In order to avoid a  before apply- ing maximum or average pooling the activation dimension of the network filters is expanded.
 representational bottleneck(표현 병목)을 피하기위해 먼저 인셉션 모듈을 통과시킨 후 pooling을 적용한다. 
+
 ![](/images/InceptionNetv2v3/7.png)
 
 ## Inception v2
-7x7 합성곱을 3개의 3x3으로 대체하며
-e have 3 traditional inception modules at the 35 × 35 with 288 filters each. This is reduced to a 17 × 17 grid with 768 filters using the grid reduction technique described in section 5.
-Although our network is 42 layers deep, our computation cost is only about 2.5 higher than that of GoogLeNet and it is still much more efficient than VGGNet.
+7x7 합성곱을 3개의 3x3으로 대체하며, 42개의 층을 쌓았지만 더 효율적이고 이전 버전과 VGGNet보다 더 적은 연산량을 사용함
+
 ![](/images/InceptionNetv2v3/9.png)
 
 #### Model Regularization via Label Smoothing
@@ -98,6 +98,7 @@ $$
 
 #### Result
 ![](/images/InceptionNetv2v3/10.png)
+
 The last line of the above graph indicates Inception v3, BN-auxiliary refers to the version in which the fully connected layer of the auxiliary classifier is also batch-normalized, not just the convolutions.
 
 
