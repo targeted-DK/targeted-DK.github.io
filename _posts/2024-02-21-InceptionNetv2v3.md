@@ -70,7 +70,9 @@ Although our network is 42 layers deep, our computation cost is only about 2.5 h
 #### Model Regularization via Label Smoothing
 
 각 데이터 x에 대하여 label k 값을
-$$p(k|x) = \frac{exp(z_{k})}{\sum_{i=1}^{K} exp(z_{i}}}  $$
+$$
+p(k|x) = \frac{exp(z_{k})}{\sum_{i=1}^{K} exp(z_{i})}
+$$
 
 
 
