@@ -76,6 +76,11 @@ p(k|x) = \frac{exp(z_{k})}{\sum_{i=1}^{K} exp(z_{i})}
 
 $$
 
+$p(k|x) = \frac{exp(z_{k})}{\sum_{i=1}^{K} exp(z_{i})}$
+
+```
+p(k|x) = \frac{exp(z_{k})}{\sum_{i=1}^{K} exp(z_{i})}
+```
 
 
 
