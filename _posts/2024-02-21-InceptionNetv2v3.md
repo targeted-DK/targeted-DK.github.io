@@ -31,45 +31,55 @@ InceptionNet v2와 v3는 기존 모델을 효율성은 유지하면서 모델을
 
 ## Factorizing Convolutions with Large Filter Size
 대부분의 GoogLeNet의 장점은 차원 축소에서 비롯되었고, 차원 축소는 필요 연산력을 감소시키기 때문에 적합한 factorization을 통해 더 압축된 매개 변수와 빠른 훈련에 필요하다. 
-Therefore, any reduction in computational cost results in reduced number of param- eters. This means that with suitable factorization, we can end up with more disentangled parameters and therefore with faster training. 
+Therefore, any reduction in computational cost results in reduced number of parameters. This means that with suitable factorization, we can end up with more disentangled parameters and therefore with faster training. 
 
 ### Factorization into smaller convolutions
-연구에서는 factorization(분해)를 여러 개의 작은 합성곱으로 나누는 것으로 정의한다. 5x5 합성곱은 3x3합성곱 한 개에 비해 연산량이 (5*5)/(3*3) = 2.78배 비싸다. 다만 
-
-![](/images/InceptionNet/1.png)
-
-
-![](/images/InceptionNet/2.png)
-- 각 인셉션 모듈의 output size는 1x1, 3x3, 5x5, pool proj의 갯수를 더한 값이 된다. 
-
-### Fully Connected Layer(FC) vs Global Average Pooling(GAP)
-![https://www.researchgate.net/figure/Fully-flattened-layer-and-global-pooling-layer-The-step-next-to-encoding-is-to-generate_fig4_364679555](/images/InceptionNet/3.png)
+더 넓은 필터의 크기는 멀리있는 레이어의 signal을 엿볼수 있기 때문에, 필터 크기 감소는 expressiveness(표현력)을 크게 감소시킨다. 다만 이 연구에서는 큰 필터를 여러 레이어의 작은 레이어로 표현하여 연산량을 줄이면서 비슷한 표현력을 구현하려고 한다. 연구에서는 factorization(분해)를 여러 개의 작은 합성곱으로 나누는 것으로 정의한다. 5x5 합성곱은 3x3합성곱 한 개에 비해 연산량이 (3*3)*2/(5*5), 즉 28% 감소한다. 
+아래 사진과 같이 결국 두 개의 3x3 레이어는 한 개의 5x5 레이어 구현이 가능하다. 
 
 
-![](/images/InceptionNet/4.png)
-![](/images/InceptionNet/5.png)
-- 여러 인셉션 모듈이 이어져있으며, 길목 마다 max-pooling이 존재한다. 예전에는 Local Reponse Normalization(LRN)을 사용했지만 현재는 conv-batch-relu로 이어지는 레이어를 사용한다.
+다음 질문은 과연 이런 차원 축소를 통한 필요 연산량의 감소가 expressiveness 감소를 유발하냐는 질문이다. 이는 output activations(활성화된 출력물)의 batch-normalization을 통해 네트워크가 배우는 이점을 가지게 된다고 생각한다.(We attribute this gain to the enhanced space of variations that the network can learn especially if we batch normalize the output activations.) 
 
-![](/images/InceptionNet/6.png)
-- auxiliary classifiers가 추가됨. (vanishing gradient 방지). 마지막 계싼되는 softmax의 loss = out_loss + 0.3*(aux2_loss + aux3_loss)
-- By adding auxiliary classifiers connected to these intermediate layers, we would expect to encourage discrimination in the lower stages in the classifier, increase the gradient signal that gets propagated back, and provide additional regularization
+### Spatial Factorization into Asymmetric Convolutions
+![](/images/InceptionNetv2v3/2.png)
+위에서는 n*n 필터를 더 작은 m*m 필터로 구현하고 했지만, 항상 성능 향상을 보장하지 않아서 이번에는 n*n필터를 1*m 과 m*1필터로 구현하려고 한다. 이런 경우, 기존의 인셉션 모델이 다음과 같이 변형된다. 
 
-### layer configurations
-![](/images/InceptionNet/7.png)
-1. average pooling으로는 5x5 필터와 stride 값은 3을 사용하여 위 표에 나와았는 4a, 4d 단계에 각각 4×4×512, 4×4×528이 출력됨.
-2. 1x1 합성곱으로 128개의 필터가 차원축소(dimension reduction)에 사용되었으며 ReLu가 사용됨.
-3. 완전 연결층(FC layer)의 경우 1024의 개체가 사용되었으며 ReLu가 사용됨.
-4. Dropout 비율은 79%.
-5. Softmax loss is used for loss calculation.
+![](/images/InceptionNetv2v3/3.png)
+![](/images/InceptionNetv2v3/4.png)
 
-## Model Performance
-![](/images/InceptionNet/8.png)
-- 7 models were ensembled(6 models with same initialization + 1 wider model). The only difference was the order of images being trained.
-- Resize the image to 4 scales where the shorter dimension (height or width) is 256, 288, 320 and 352 respectively, take the left, center and right square of these resized images 
-- 간단히 말하면, 이미지를 4개로 resize (make whatever is shorter of height and width to match 256 or 288 or 320 or 352) and crop into three images (left, center, right or top, center, bottom
-- 좌우 반전까지 포함.
-- 다음 각 3개의 이미지를 또 4개 코너와 중앙 이미지로 총 5개를 224x224 사이즈로 crop.
-- 4*3*2(mirrored)*6(4+1+1(original image resized to 224x224) = 144 images
+In practice, we have found that employing this factorization does not work well on early layers, but it gives very good re- sults on medium grid-sizes (On m × m feature maps, where m ranges between 12 and 20). On that level, very good re- sults can be achieved by using 1 × 7 convolutions followed by 7 × 1 convolutions.
+
+![](/images/InceptionNetv2v3/5.png)
+![](/images/InceptionNetv2v3/6.png)
+
+## Utility of Auxiliary Classifiers
+we found that auxiliary classifiers did not result in improved convergence early in the training:
+Instead, we argue that the auxiliary clas- sifiers act as regularizer.
+
+
+## Efficient Grid Size Reduction
+In order to avoid a  before apply- ing maximum or average pooling the activation dimension of the network filters is expanded.
+representational bottleneck(표현 병목)을 피하기위해 먼저 인셉션 모듈을 통과시킨 후 pooling을 적용한다. 
+![](/images/InceptionNetv2v3/7.png)
+
+## Inception v2
+7x7 합성곱을 3개의 3x3으로 대체하며
+e have 3 traditional inception modules at the 35 × 35 with 288 filters each. This is reduced to a 17 × 17 grid with 768 filters using the grid reduction technique described in section 5.
+
+Although our network is 42 layers deep, our computation cost is only about 2.5 higher than that of GoogLeNet and it is still much more efficient than VGGNet.
+#### Model Regularization via Label Smoothing
+각 데이터 x에 대하여 label k 값을 $p(k|x) = \frac{exp(z_{k})}{\sum_{i=1}^{K} exp(z_{i}}}  $
+
+
+
+
+
+
+
+
+
+
+
 
 ## Conclusion
 1. significant quality gain at a modest increase of computational requirements
