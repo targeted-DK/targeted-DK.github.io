@@ -65,10 +65,12 @@ representational bottleneck(표현 병목)을 피하기위해 먼저 인셉션 �
 ## Inception v2
 7x7 합성곱을 3개의 3x3으로 대체하며
 e have 3 traditional inception modules at the 35 × 35 with 288 filters each. This is reduced to a 17 × 17 grid with 768 filters using the grid reduction technique described in section 5.
-
 Although our network is 42 layers deep, our computation cost is only about 2.5 higher than that of GoogLeNet and it is still much more efficient than VGGNet.
+
 #### Model Regularization via Label Smoothing
-각 데이터 x에 대하여 label k 값을 $p(k|x) = \frac{exp(z_{k})}{\sum_{i=1}^{K} exp(z_{i}}}  $
+
+각 데이터 x에 대하여 label k 값을
+$$p(k|x) = \frac{exp(z_{k})}{\sum_{i=1}^{K} exp(z_{i}}}  $$
 
 
 
