@@ -76,6 +76,7 @@ p(k|x) = \frac{\exp(z_{k})}{\sum_{{i=1}^{K}} \exp(z_{i})}
 $$
 
 또한 cross-entropy를 사용한 손실 함수는
+
 $$
 l = -\sum_{k=1}^{K} log(p(k))q(k)
 $$
