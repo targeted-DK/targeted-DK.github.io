@@ -42,7 +42,7 @@ Therefore, any reduction in computational cost results in reduced number of para
 
 ### Spatial Factorization into Asymmetric Convolutions
 ![](/images/InceptionNetv2v3/2.png)
-위에서는 n*n 필터를 더 작은 m*m 필터로 구현하고 했지만, 항상 성능 향상을 보장하지 않아서 이번에는 n*n필터를 1*m 과 m*1필터로 구현하려고 한다. 이런 경우, 기존의 인셉션 모델이 다음과 같이 변형된다. 
+위에서는 nxn 필터를 더 작은 mxm 필터로 구현하고 했지만, 항상 성능 향상을 보장하지 않아서 이번에는 nxn필터를 1xm 과 mx1필터로 구현하려고 한다. 이런 경우, 기존의 인셉션 모델이 다음과 같이 변형된다. 
 
 ![](/images/InceptionNetv2v3/3.png)
 ![](/images/InceptionNetv2v3/4.png)
@@ -66,6 +66,7 @@ representational bottleneck(표현 병목)을 피하기위해 먼저 인셉션 �
 7x7 합성곱을 3개의 3x3으로 대체하며
 e have 3 traditional inception modules at the 35 × 35 with 288 filters each. This is reduced to a 17 × 17 grid with 768 filters using the grid reduction technique described in section 5.
 Although our network is 42 layers deep, our computation cost is only about 2.5 higher than that of GoogLeNet and it is still much more efficient than VGGNet.
+![](/images/InceptionNetv2v3/9.png)
 
 #### Model Regularization via Label Smoothing
 
@@ -88,24 +89,19 @@ $$
 $$
 
 이 연구에서는 one-hot encoding은 모델이 too-confident 하게 만들기 때문에 label smoothing을 사용하여 덜 확신에 차게 하도록 구현하였다. 
+#### label-smoothing regularization(LSR)
 
 $$
 y_{i} = (1 - \epilson)\delta_{i,j} + \frac{\epsilon}{K}
 $$
 
+#### Result
+![](/images/InceptionNetv2v3/10.png)
+The last line of the above graph indicates Inception v3, BN-auxiliary refers to the version in which the fully connected layer of the auxiliary classifier is also batch-normalized, not just the convolutions.
 
-
-
-
-
-
-## Conclusion
-1. significant quality gain at a modest increase of computational requirements
-2. work was competitive despite of neither utilizing context nor performing bounding box regression
-3. moving to sparser architectures is feasible and useful idea in general.
 
 ## 요약
-1. 여러 필터 결과물을 concatenate해서 사용
-2. 1x1 합성곱을 통한 차원 축소(=매개 변수 감소)
-3. auxiliary classifier를 사용하여 vanishing gredient 줄임
-4. VGGNet보다 적은 매개변수 수
+1. Factorization을 통한 매개 변수 숫자 감소
+2. representational bottleneck을 피하기 위해 바로 pooling을 하지않고 convolution(s=2)를 사용함. 이것으로 grid size 축소가능
+3. Label smoothing을 사용하여 one-hot encoding에서 오는 '확신'을 줄임.
+4. Aux classifier 사용 횟수 감소.
