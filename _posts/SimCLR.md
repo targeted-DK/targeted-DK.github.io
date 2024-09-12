@@ -1,0 +1,88 @@
+---
+layout: post
+title: "SimCLR"
+date: 2024-09-11
+categories: DL
+---
+
+# SimCLR: A Simple Framework for Contrastive Learning of Visual Representations
+
+## Overview
+This paper presents **SimCLR**, a framework for contrastive learning of visual representations. Key contributions include:
+1. The **composition of data augmentations** plays a critical role in defining effective predictive tasks.
+2. Introducing a **learnable nonlinear transformation** between the representation and the contrastive loss substantially improves the quality of the learned representations.
+3. **Contrastive learning benefits from larger batch sizes and more training steps** compared to supervised learning.
+
+SimCLR stands out because it does not require specialized architectures or a memory bank, unlike other approaches (Bachman et al., 2019; Hénaff et al., 2019). It leverages:
+- Multiple data augmentations.
+- A learnable nonlinear transformation between the representation and the contrastive loss.
+- Representation learning with **contrastive cross-entropy loss**.
+- Larger batch sizes and longer training times compared to traditional supervised learning.
+
+![SimCLR Diagram](/images/SimCLR/1.png)
+
+## Method
+### 1. The Contrastive Learning Framework
+- SimCLR sequentially applies three simple augmentations: **random cropping** (resized back to the original size), **random color distortions**, and **random Gaussian blur**.
+- A neural network base encoder `f(·)` extracts **representation vectors** from augmented data examples.
+
+### 2. Training with Large Batch Sizes
+- No memory bank is used during training. The batch size `N` varies between 256 and 8192.
+- Training with large batch sizes may be unstable with standard SGD/Momentum and linear learning rate scaling (Goyal et al., 2017). To stabilize training, the **LARS optimizer** (You et al., 2017) is used for all batch sizes.
+- **Batch normalization (BN)** mean and variance are aggregated over all devices during training.
+
+## Evaluation Protocol
+The main dataset for unsupervised pretraining is **ImageNet ILSVRC-2012**, a widely used benchmark in computer vision, containing 1.2 million labeled images across 1000 categories.
+
+### 1. **Linear Evaluation Protocol**:
+A linear classifier is trained on top of the frozen base encoder to evaluate the learned representations.
+
+### 2. **Transfer Learning**:
+The pre-trained model is applied to other datasets for transfer learning tasks.
+
+## Default Settings
+- **Data Augmentation**: Random cropping, resizing, color distortions, Gaussian blur.
+- **Encoder Network**: A ResNet or similar architecture is used for feature extraction.
+- **MLP Projection Head**: A small multi-layer perceptron (MLP) that projects the encoder’s output into a latent space.
+
+## Optimization
+- **Loss Function**: **NT-Xent** (Normalized Temperature-Scaled Cross Entropy Loss) is used to measure similarity between positive and negative pairs.
+- **Optimizer**: **LARS** (Layer-wise Adaptive Rate Scaling) with a learning rate of 4.8, adjusted based on batch size. LARS stabilizes training with large batches.
+- **Weight Decay**: A weight decay value of `10^-6` is applied for regularization.
+  
+### Batch Size and Training Epochs
+- Batch size: 4096
+- Training duration: 100 epochs.
+- **Linear Warmup**: The learning rate is gradually increased during the first 10 epochs to stabilize training.
+- **Cosine Decay Schedule**: The learning rate follows a cosine decay schedule without restarts for smooth convergence.
+
+## Data Augmentation
+### 3.1 Composition of Data Augmentation
+Data augmentation plays a crucial role in learning good representations. Simple random cropping (with resizing) creates a family of predictive tasks, enabling better learning.
+
+![](/images/SimCLR/2.png)
+![](/images/SimCLR/3.png)
+
+### 3.2 Contrastive Learning Requires Stronger Augmentations
+Unsupervised contrastive learning benefits from stronger data augmentations (especially color distortions) than supervised learning does.
+
+## Architectures for Encoder and Projection Head
+### 4.1 Bigger Models Benefit Unsupervised Contrastive Learning
+Larger models are shown to benefit **unsupervised contrastive learning** more than supervised learning.
+
+![](/images/SimCLR/4.png)
+
+### 4.2 Nonlinear Projection Head Improves Representation Quality
+The **MLP projection head** maps high-dimensional feature vectors into a lower-dimensional space. It has two layers: 
+- The first layer transforms the input to a hidden dimension.
+- The second layer transforms it into the desired output dimension.
+
+**ReLU activation** is applied after the first layer for non-linearity. The layer before the projection head retains more valuable information than the layer after.
+
+## Loss Functions and Batch Size
+### 5.1 Normalized Cross Entropy with Adjustable Temperature
+The **NT-Xent loss** (contrastive loss) works better with larger batch sizes and longer training compared to alternatives such as logistic loss or margin loss.
+
+## Conclusion
+SimCLR’s strength lies in its simplicity. It differs from standard supervised learning primarily in the choice of **data augmentation**, the use of a **nonlinear projection head**, and the **contrastive loss function**. Despite the simplicity, the framework achieves remarkable results in **self-supervised learning**.
+
