@@ -83,6 +83,6 @@ $\eta^t \leftarrow \arg\min_{\theta} L(\theta^{t}, \eta)$
 하지만 저자들은 충분한 근거를 제시하지 않았으며 모델의 붕괴가 방지되는 현상을 실험적으로 관찰 할 수만 있다고 제시함. 
 
 다음 그림은 여러 unsupervised learning 모델을 간결하게 표시한 도표임,. 
-
+![](/images/Siamese/3.png)
 
 
