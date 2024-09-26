@@ -49,4 +49,40 @@ $D(p_1, \text{stopgrad}(z_2))$
 $L = 2D(p_1, \text{stopgrad}(z_2)) + 2D(p_2, \text{stopgrad}(z_1))$.
 여기서 주목해야 할 점은 첫 번째 항에서 $x_2$의 인코더는 $z_2$로부터 아무 가중치를 받지 않지만, 두 번째 항에서 $p_2$로부터는 받음.($x_1$도 동일함)
 
+Optimizer는 SGD를 사용하며, Projection ML에서는 BN이 추가된 두 개의FC layer를 가지고 있으며 마지막 output layer에는 ReLU는없고 BN만 있는 레이어임.
+Prediction MLP에서는 BN과 ReLU 둘 다 포함하지 않으며 두 개의 레이어가 있음. 입력과 출력 백터의 크기는 2048이며 중간의 hidden layer의 크기가 512이어서 h가 병목구조를 가지게 됨.
+
+ResNet-50을 기본 뼈대로 사용하였으며 100-epoch pre-training을 거침.
+
+ImageNet 훈련 데이터 셋의 1000개 class로 비지도 학습 사전 학습을 진행하였음. 평가에는 학습된 prepresentation을 고정시켜 supervised linear classifier을 사용하고 이를 validation set에 사용하였음.
+
+## Empirical Study
+모델이 stop-gradient를 사용하지 않으면 빠르게 붕괴하고, 출력된 표현이 모든 입력에 대해 거의 동일해짐(빨간 곡선). 이 때문에 표준편차가 0에 가까워지는데, 이는 출력값이 모든 입력에 대해 거의 동일하다는 것을 의미하며, 붕괴가 발생했음을 나타냄.
+
+모델이 stop-gradient를 사용할 때는, 표현이 다양성을 유지하며, 표준편차가 $\sqrt(1/d)$ 근처에 머무름(파란 곡선). 이는 출력값이 잘 분포되어 있음을 시사하며, 모델이 붕괴하지 않고 있음을 나타냄. 출력값에 변동성이 존재하며, 이는 잘 학습된 표현에서 보여지는 모습임.
+![](/images/Siamese/2.png)
+
+이 실험에서는 predictor MLP가 모델의 성능에 미치는 영향을 확인했는데, 특히 $h$(predictor MLP)가 중요함.
+$h$가 $I$일 경우 모델은 붕괴하며, random init 또한 의미가 없음. learning rate가 cosine decay거나 고정되어있을때 정확도가 올라가는데, 이는 lr를 수렴시키지 않음으로써 충분한 표현력을 학습시키는데 도움을 주는것으로 판단함. 
+
+배치 정규화의 경우 모델 붕괴를 막는데 중요한 역할을 하지 않음. BN보다 더 중요한건 stop-gradient 사용 유무라고 판단함. 
+
+코사인 유사도 말고 교차-엔트로피 유사도를 사용해 실험을 진행함. $D(p_1,z_2)=−softmax(z_2)·log softmax(p_1)$. 코사인 유사도의 정확도가 더 높지만 교차-엔트로피 유사도 또한 모델 붕괴를 방지함.
+
+## Hypothesis
+가설 중 하나는 SimSiam이 Expectation-Maximization 알고리즘의 형태를 띌 수 있다는 점임. 
+$L(\theta, \eta) = \mathbb{E}_{x,T} \left[ \| F_{\theta}(T(x)) - \eta x \|_2^2 \right]$
+F is a network parameterized by θ. T is the augmentation. x is an image. The expectation E[·] is over the distribution of images and augmentations. For the ease of analysis, here we use the mean squared error ∥ · ∥2, which is equivalent to the cosine similarity if the vectors are l2-normalized.
+
+$\min_{\theta, \eta} L(\theta, \eta)$
+
+$\theta^t \leftarrow \arg\min_{\theta} L(\theta, \eta^{t-1})$
+
+$\eta^t \leftarrow \arg\min_{\theta} L(\theta^{t}, \eta)$
+
+하지만 저자들은 충분한 근거를 제시하지 않았으며 모델의 붕괴가 방지되는 현상을 실험적으로 관찰 할 수만 있다고 제시함. 
+
+다음 그림은 여러 unsupervised learning 모델을 간결하게 표시한 도표임,. 
+
+
 
