@@ -6,7 +6,7 @@ categories: papers
 ---
 
 # Exploring Simple Siamese Representation Learning
-
+ 
 ## Overview
 
 Siamese 네트워크는 비지도 visual 표현 학습에서 자주 쓰이는 네트워크이다. 한 이미지로부터 두 개의 증강 이미지의 유사도를 비교하여 붕괴되는 현상을 막는데 초점을 두고있다. 
