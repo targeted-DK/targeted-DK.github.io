@@ -67,7 +67,7 @@ To avoid representational bottlenecks, we first pass through the inception modul
 각 데이터 \(x\)에 대하여 label \(k\) 값을
 
 $$
-p(k|x) = \frac{\exp(z_{k})}{\sum_{{i=1}}^{K} \exp(z_{i})}
+p(k|x) = \frac{\exp(z_{k})}{\sum_{i=1}^{K} \exp(z_{i})}
 $$
 
 또한 cross-entropy를 사용한 손실 함수는
