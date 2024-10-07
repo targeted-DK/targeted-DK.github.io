@@ -73,4 +73,3 @@ Coarse-to-fine strategy를 사용하여 dense grid를 이용한 저해상도에�
 이 연구에서는 voxel의 불투명성과 구체 조화 계수를 평균 제곱 오차와 total variation regularization을 이용하여 최적화에 사용한다. 
 ![](/images/Plenoxels/4.png)
 
-
